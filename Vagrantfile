@@ -55,4 +55,9 @@ Vagrant.configure("2") do |config|
     adduser vagrant docker
   SHELL
 
+  config.vm.provision :shell, path: "vagrant-provisioning/provision.sh",
+                              env: {"VM_HOSTNAME" => settings['hostname'],
+                                    "VM_DOMAIN" => settings['domain'],
+                                    }
+
 end
