@@ -1,10 +1,12 @@
 version: '2'
+# https://docs.gitlab.com/omnibus/docker/README.html#install-gitlab-using-docker-compose
 services:
   web:
     image: 'gitlab/gitlab-ce:12.5.4-ce.0'
     restart: always
     hostname: "${HOSTNAME_FQDN}"
     environment:
+      # https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-config-template/gitlab.rb.template
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://${HOSTNAME_FQDN}'
         # rather not take over the really ssh port 22 of the host
