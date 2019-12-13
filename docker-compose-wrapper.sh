@@ -7,6 +7,7 @@ NORMAL=$(tput sgr0)
 # list of all variables to be substituted in templates
 VARS='
   $HOSTNAME_FQDN
+  $INITIAL_ROOT_PASSWORD
 '
 
 # list of vars to be substituted in template but they do not have to be set in

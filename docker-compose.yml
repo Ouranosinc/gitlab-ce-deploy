@@ -10,6 +10,10 @@ services:
         # rather not take over the really ssh port 22 of the host
         # still need for ssh connection to the host for administration
         gitlab_rails['gitlab_shell_ssh_port'] = 2224
+
+        # Only applicable on initial setup, changing these settings
+        # after database is created and seeded won't yield any change.
+        gitlab_rails['initial_root_password'] = "${INITIAL_ROOT_PASSWORD}"
     ports:
       - '80:80'
       - '443:443'
