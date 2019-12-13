@@ -7,10 +7,13 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://${HOSTNAME_FQDN}'
+        # rather not take over the really ssh port 22 of the host
+        # still need for ssh connection to the host for administration
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
     ports:
       - '80:80'
       - '443:443'
-      - '22:22'
+      - '2224:22'
     volumes:
       - 'gitlab_config_persistence:/etc/gitlab'
       - 'gitlab_logs_persistence:/var/log/gitlab'
