@@ -16,6 +16,16 @@ services:
         # Only applicable on initial setup, changing these settings
         # after database is created and seeded won't yield any change.
         gitlab_rails['initial_root_password'] = "${INITIAL_ROOT_PASSWORD}"
+
+        gitlab_rails['smtp_enable'] = true
+        gitlab_rails['smtp_address'] = "${SMTP_SERVER}"
+        gitlab_rails['smtp_port'] = 25
+        gitlab_rails['smtp_tls'] = false
+        gitlab_rails['smtp_openssl_verify_mode'] = 'none'
+        gitlab_rails['smtp_enable_starttls_auto'] = false
+        gitlab_rails['smtp_ssl'] = false
+        gitlab_rails['smtp_force_ssl'] = false
+
     ports:
       - '80:80'
       - '443:443'
