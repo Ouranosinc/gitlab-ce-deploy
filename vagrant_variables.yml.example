@@ -1,0 +1,20 @@
+---
+hostname: myhostname
+#domain: mydomain
+
+# Set network bridge, else you'll simply be prompted on vagrant up.
+# network_bridge: enp0s25
+
+# Set hostip if you want to force an IP, useful to keep the same IP after each
+# VM destroy and recreate.
+# hostip: 1.2.3.4
+
+# Force a default gateway if networking issue (ex: VM in a different DMZ VLan).
+# default_gateway: 1.2.3.4
+
+
+# VM Settings
+#
+# memory: 4096
+# cpus: 2
+# disksize: '40GB'

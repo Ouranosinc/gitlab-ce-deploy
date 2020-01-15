@@ -1,0 +1,49 @@
+version: '2'
+# https://docs.gitlab.com/omnibus/docker/README.html#install-gitlab-using-docker-compose
+services:
+  web:
+    image: 'gitlab/gitlab-ce:12.5.4-ce.0'
+    restart: always
+    hostname: "${HOSTNAME_FQDN}"
+    environment:
+      # https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-config-template/gitlab.rb.template
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://${HOSTNAME_FQDN}'
+        # rather not take over the really ssh port 22 of the host
+        # still need for ssh connection to the host for administration
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+
+        # Only applicable on initial setup, changing these settings
+        # after database is created and seeded won't yield any change.
+        gitlab_rails['initial_root_password'] = "${INITIAL_ROOT_PASSWORD}"
+
+        gitlab_rails['smtp_enable'] = true
+        gitlab_rails['smtp_address'] = "${SMTP_SERVER}"
+        gitlab_rails['smtp_port'] = 25
+        gitlab_rails['smtp_tls'] = false
+        gitlab_rails['smtp_openssl_verify_mode'] = 'none'
+        gitlab_rails['smtp_enable_starttls_auto'] = false
+        gitlab_rails['smtp_ssl'] = false
+        gitlab_rails['smtp_force_ssl'] = false
+
+    ports:
+      - '80:80'
+      - '443:443'
+      - '2224:22'
+    volumes:
+      - 'gitlab_config_persistence:/etc/gitlab'
+      - 'gitlab_logs_persistence:/var/log/gitlab'
+      - 'gitlab_data_persistence:/var/opt/gitlab'
+
+volumes:
+  gitlab_data_persistence:
+    external:
+      name: gitlab_data_persistence
+  gitlab_config_persistence:
+    external:
+      name: gitlab_config_persistence
+  gitlab_logs_persistence:
+    external:
+      name: gitlab_logs_persistence
+
+# vi: tabstop=8 expandtab shiftwidth=2 softtabstop=2
