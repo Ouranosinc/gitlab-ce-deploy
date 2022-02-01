@@ -41,6 +41,13 @@ services:
       - 'gitlab_logs_persistence:/var/log/gitlab'
       - 'gitlab_data_persistence:/var/opt/gitlab'
 
+  runner:
+    image: 'gitlab/gitlab-runner'
+    restart: always
+    volumes:
+      - '/srv/gitlab-runner/config:/etc/gitlab-runner:rw'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+
 volumes:
   gitlab_data_persistence:
     external:
