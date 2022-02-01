@@ -14,8 +14,6 @@ services:
         pages_external_url 'http://${HOSTNAME_FQDN}'
         pages_nginx['redirect_http_to_https'] = false
         gitlab_pages['inplace_chroot'] = true
-        gitlab_pages['http_proxy'] = 'http://${HOSTNAME_FQDN}:8080'
-        gitlab_pages['listen_proxy'] = "${HOSTNAME_FQDN}:10080"
 
         # rather not take over the really ssh port 22 of the host
         # still need for ssh connection to the host for administration
@@ -36,8 +34,6 @@ services:
 
     ports:
       - '80:80'
-      - '8080:8080'
-      - '10080:10080'
       - '443:443'
       - '2224:22'
     volumes:
