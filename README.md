@@ -18,6 +18,13 @@ Start Gitlab
 ./docker-compose-wrapper.sh up -d
 ```
 
+Register runner
+```
+$EDITOR env.local  # set proper GITLAB_TOKEN after first startup
+./register-runner
+```
+
+
 Access Gitlab at
 http://${HOSTNAME_FQDN},
 those variables are from your customized `env.local` file.
@@ -97,4 +104,17 @@ vagrant reload
 # maybe because it was provisioned too long ago, to the latest state.
 # not needed normally during tight development loop
 vagrant provision
+```
+
+One time manual instruction after first `vagrant up`
+```
+# Get into VM
+vagrant ssh
+
+# Go to workdir
+cd /vagrant/
+
+# Register runner
+$EDITOR env.local  # set proper GITLAB_TOKEN after first startup
+./register-runner
 ```

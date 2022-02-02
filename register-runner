@@ -1,0 +1,18 @@
+#!/bin/sh -x
+#
+# To execute after first `docker-compose-wrapper.sh up -d`
+
+# Get GITLAB_WEB_URL, GITLAB_TOKEN
+. env.local
+
+docker exec gitlab-runner register \
+  --non-interactive \
+  --executor "docker" \
+  --docker-image alpine:latest \
+  --url "${GITLAB_WEB_URL}" \
+  --registration-token "${GITLAB_TOKEN}" \
+  --description "docker-runner1" \
+  --tag-list "docker,runner,runner1,docker-runner1" \
+  --run-untagged="true" \
+  --locked="false" \
+  --access-level="not_protected"
