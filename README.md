@@ -1,6 +1,15 @@
 # gitlab-ce-deploy
 Deploy gitlab-ce using docker-compose
 
+## Prerequite
+
+* Gitlab Pages needs "wildcard DNS" to be setup for this Gitlab host, see
+https://docs.gitlab.com/ee/administration/pages/index.html#dns-configuration.
+
+  Basically, we need `<any subdomains>.HOSTNAME_FQDN` to point to the same IP
+  as `HOSTNAME_FQDN`. `HOSTNAME_FQDN` is the hostname of this Gitlab host and
+  is set in `env.local` file.
+
 ## Usage
 
 Ensure you have [docker](https://www.docker.com/) and
