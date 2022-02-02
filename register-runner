@@ -1,6 +1,7 @@
 #!/bin/sh -x
+# https://docs.gitlab.com/runner/register/#one-line-registration-command
 #
-# To execute after first `docker-compose-wrapper.sh up -d`
+# To execute after first `docker-compose-wrapper.sh up -d`.
 
 set +x  # hide password
 # Get GITLAB_WEB_URL, GITLAB_TOKEN
