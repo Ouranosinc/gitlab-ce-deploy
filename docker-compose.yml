@@ -3,6 +3,7 @@ version: '2'
 services:
   web:
     image: 'gitlab/gitlab-ce:12.5.4-ce.0'
+    container_name: gitlab-web
     restart: always
     hostname: "${HOSTNAME_FQDN}"
     environment:
@@ -43,6 +44,7 @@ services:
 
   runner:
     image: 'gitlab/gitlab-runner:v14.7.0'
+    container_name: gitlab-runner
     restart: always
     volumes:
       - './config/runner/config.toml:/etc/gitlab-runner/config.toml:ro'
