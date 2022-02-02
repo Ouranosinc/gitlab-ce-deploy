@@ -1,7 +1,12 @@
 # gitlab-ce-deploy
 Deploy gitlab-ce using docker-compose
 
+
 ## Prerequite
+
+* Ensure you have [docker](https://www.docker.com/) and
+  [docker-compose](https://docs.docker.com/compose/) installed on your Linux
+  host.
 
 * Gitlab Pages needs "wildcard DNS" to be setup for this Gitlab host, see
 https://docs.gitlab.com/ee/administration/pages/index.html#dns-configuration.
@@ -10,11 +15,8 @@ https://docs.gitlab.com/ee/administration/pages/index.html#dns-configuration.
   as `HOSTNAME_FQDN`. `HOSTNAME_FQDN` is the hostname of this Gitlab host and
   is set in `env.local` file.
 
-## Usage
 
-Ensure you have [docker](https://www.docker.com/) and
-[docker-compose](https://docs.docker.com/compose/) installed on your Linux
-host.
+## Usage
 
 One time setup
 ```
@@ -27,7 +29,7 @@ Start Gitlab
 ./docker-compose-wrapper.sh up -d
 ```
 
-Register runner
+Register runner once only, after first startup
 ```
 $EDITOR env.local  # set proper GITLAB_TOKEN after first startup
 ./docker-compose-wrapper.sh restart gitlab-runner
@@ -127,7 +129,7 @@ vagrant ssh
 # Go to workdir
 cd /vagrant/
 
-# Register runner
+# Register runner only only, after first startup
 $EDITOR env.local  # set proper GITLAB_TOKEN after first startup
 ./docker-compose-wrapper.sh restart gitlab-runner
 ./register-runner
