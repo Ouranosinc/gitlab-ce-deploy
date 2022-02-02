@@ -21,6 +21,7 @@ Start Gitlab
 Register runner
 ```
 $EDITOR env.local  # set proper GITLAB_TOKEN after first startup
+./docker-compose-wrapper.sh restart gitlab-runner
 ./register-runner
 ```
 
@@ -106,7 +107,7 @@ vagrant reload
 vagrant provision
 ```
 
-One time manual instruction after first `vagrant up`
+One time manual instruction after first `vagrant up`:
 ```
 # Get into VM
 vagrant ssh
@@ -116,5 +117,6 @@ cd /vagrant/
 
 # Register runner
 $EDITOR env.local  # set proper GITLAB_TOKEN after first startup
+./docker-compose-wrapper.sh restart gitlab-runner
 ./register-runner
 ```
