@@ -7,7 +7,7 @@ check_interval = 0
   session_timeout = 1800
 
 [[runners]]
-  name = "docker-runner"
+  name = "docker-runner1"
   url = "${GITLAB_WEB_URL}"
   token = "${GITLAB_TOKEN}"
   executor = "docker"
