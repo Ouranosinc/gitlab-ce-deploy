@@ -30,6 +30,9 @@ Access Gitlab at
 http://${HOSTNAME_FQDN},
 those variables are from your customized `env.local` file.
 
+Access Gitlab Pages at http://\<USER or GROUP\>.${HOSTNAME_FQDN}/\<REPO\>.
+Remember to trigger the pipeline for the pages to be generated properly.
+
 `docker-compose-wrapper.sh` is just a wrapper around `docker-compose` so all valid
 docker-compose use-cases and command-line options are supported.
 
