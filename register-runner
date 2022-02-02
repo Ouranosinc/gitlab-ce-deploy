@@ -2,10 +2,12 @@
 #
 # To execute after first `docker-compose-wrapper.sh up -d`
 
+set +x  # hide password
 # Get GITLAB_WEB_URL, GITLAB_TOKEN
-. env.local
+. ./env.local
+set -x
 
-docker exec gitlab-runner register \
+docker exec gitlab-runner gitlab-runner register \
   --non-interactive \
   --executor "docker" \
   --docker-image alpine:latest \
