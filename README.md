@@ -129,7 +129,7 @@ vagrant ssh
 # Go to workdir
 cd /vagrant/
 
-# Register runner only only, after first startup
+# Register runner once only, after first startup
 $EDITOR env.local  # set proper GITLAB_TOKEN after first startup
 ./docker-compose-wrapper.sh restart gitlab-runner
 ./register-runner
