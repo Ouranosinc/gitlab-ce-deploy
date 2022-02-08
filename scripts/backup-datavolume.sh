@@ -16,6 +16,10 @@ else
     VOLUME_MOUNT_OPT="rw"
     TAR_OPT="x"
     TAR_OPT2=""
+
+    # delete old volume for fresh restore
+    docker volume rm $DATA_VOL_NAME
+    docker volume create $DATA_VOL_NAME
 fi
 
 echo "Will $MODE_MSG $BACKUP_OUT_DIR/$DATA_VOL_NAME.tgz"
