@@ -8,6 +8,8 @@ NORMAL=$(tput sgr0)
 VARS='
   $HOSTNAME_FQDN
   $INITIAL_ROOT_PASSWORD
+  $GITLAB_WEB_URL
+  $GITLAB_TOKEN
 '
 
 # list of vars to be substituted in template but they do not have to be set in
@@ -40,12 +42,12 @@ then
 fi
 
 ## we apply all the templates
-#find ./config -name '*.template' -print0 |
-#  while IFS= read -r -d $'\0' FILE
-#  do
-#    DEST=${FILE%.template}
-#    cat ${FILE} | envsubst "$VARS" | envsubst "$OPTIONAL_VARS" > ${DEST}
-#  done
+find ./config -name '*.template' -print0 |
+  while IFS= read -r -d $'\0' FILE
+  do
+    DEST=${FILE%.template}
+    cat ${FILE} | envsubst "$VARS" | envsubst "$OPTIONAL_VARS" > ${DEST}
+  done
 
 if [[ $1 == "up" ]]; then
   # no error if already exist

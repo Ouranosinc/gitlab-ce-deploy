@@ -1,11 +1,22 @@
 # gitlab-ce-deploy
 Deploy gitlab-ce using docker-compose
 
-## Usage
 
-Ensure you have [docker](https://www.docker.com/) and
-[docker-compose](https://docs.docker.com/compose/) installed on your Linux
-host.
+## Prerequite
+
+* Ensure you have [docker](https://www.docker.com/) and
+  [docker-compose](https://docs.docker.com/compose/) installed on your Linux
+  host.
+
+* Gitlab Pages needs "wildcard DNS" to be setup for this Gitlab host, see
+https://docs.gitlab.com/ee/administration/pages/index.html#dns-configuration.
+
+  Basically, we need `<any subdomains>.HOSTNAME_FQDN` to point to the same IP
+  as `HOSTNAME_FQDN`. `HOSTNAME_FQDN` is the hostname of this Gitlab host and
+  is set in `env.local` file.
+
+
+## Usage
 
 One time setup
 ```
@@ -18,9 +29,20 @@ Start Gitlab
 ./docker-compose-wrapper.sh up -d
 ```
 
+Register runner once only, after first startup
+```
+$EDITOR env.local  # set proper GITLAB_TOKEN after first startup
+./docker-compose-wrapper.sh restart gitlab-runner
+./register-runner
+```
+
+
 Access Gitlab at
 http://${HOSTNAME_FQDN},
 those variables are from your customized `env.local` file.
+
+Access Gitlab Pages at http://\<USER or GROUP\>.${HOSTNAME_FQDN}/\<REPO\>.
+Remember to trigger the pipeline for the pages to be generated properly.
 
 `docker-compose-wrapper.sh` is just a wrapper around `docker-compose` so all valid
 docker-compose use-cases and command-line options are supported.
@@ -97,4 +119,18 @@ vagrant reload
 # maybe because it was provisioned too long ago, to the latest state.
 # not needed normally during tight development loop
 vagrant provision
+```
+
+One time manual instruction after first `vagrant up`:
+```
+# Get into VM
+vagrant ssh
+
+# Go to workdir
+cd /vagrant/
+
+# Register runner once only, after first startup
+$EDITOR env.local  # set proper GITLAB_TOKEN after first startup
+./docker-compose-wrapper.sh restart gitlab-runner
+./register-runner
 ```

@@ -1,9 +1,11 @@
 #!/bin/sh -x
-# Backup to
+# Backup to or restore from
 # * /tmp/gitlab_data_persistence.tgz
 # * /tmp/gitlab_logs_persistence.tgz
 # * /tmp/gitlab_config_persistence.tgz
 # with default values.
+#
+# Restore usage: BACKUP_OUT_DIR=/some/dir backup-gitlab.sh restore
 
 cd `dirname "$0"`/..
 
@@ -17,7 +19,7 @@ if [ -z "$DOCKER_USER_PERSISTENCE_VOLUMES" ]; then
 fi
 
 for vol in $DOCKER_USER_PERSISTENCE_VOLUMES; do
-    scripts/backup-datavolume.sh "$vol" "$BACKUP_OUT_DIR"
+    scripts/backup-datavolume.sh "$vol" "$BACKUP_OUT_DIR" "$@"
 done
 
 for vol in $DOCKER_USER_PERSISTENCE_VOLUMES; do

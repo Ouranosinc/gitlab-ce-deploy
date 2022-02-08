@@ -1,0 +1,21 @@
+#!/bin/sh -x
+# https://docs.gitlab.com/runner/register/#one-line-registration-command
+#
+# To execute after first `docker-compose-wrapper.sh up -d`.
+
+set +x  # hide password
+# Get GITLAB_WEB_URL, GITLAB_TOKEN
+. ./env.local
+set -x
+
+docker exec gitlab-runner gitlab-runner register \
+  --non-interactive \
+  --executor "docker" \
+  --docker-image alpine:latest \
+  --url "${GITLAB_WEB_URL}" \
+  --registration-token "${GITLAB_TOKEN}" \
+  --description "docker-runner1" \
+  --tag-list "docker,runner,runner1,docker-runner1" \
+  --run-untagged="true" \
+  --locked="false" \
+  --access-level="not_protected"
