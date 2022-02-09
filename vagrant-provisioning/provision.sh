@@ -41,3 +41,10 @@ if [ ! -f "$SSL_CERTIFICATE" -a ! -f "$SSL_CERTIFICATE_KEY" ]; then
 else
     echo "existing '$SSL_CERTIFICATE' or '$SSL_CERTIFICATE_KEY' file, not overriding"
 fi
+
+
+sudo apt update
+sudo apt install docker.io docker-compose
+
+# Start the whole stack.
+./docker-compose-wrapper.sh up -d
