@@ -11,6 +11,10 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://${HOSTNAME_FQDN}'
 
+        # https://docs.gitlab.com/omnibus/settings/nginx.html#setting-http-strict-transport-security
+        # https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/
+        # nginx['hsts_max_age'] = 0  # 0 disable HSTS, for self-signed SSL cert only
+
         # https://docs.gitlab.com/12.10/ee/administration/pages/index.html#wildcard-domains
         # pages will be available at http://<USER or GROUP>.${HOSTNAME_FQDN}/<REPO>
         # TODO: switch to httpS for Pages once we have Wildcard SSL Cert.
