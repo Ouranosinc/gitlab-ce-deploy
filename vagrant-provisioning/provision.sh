@@ -46,5 +46,14 @@ fi
 sudo apt update
 sudo apt install docker.io docker-compose
 
+# Add current user to group docker to not have to always do 'sudo docker'
+sudo usermod -a -G docker $USER
+if [ -n "`df -h | grep ^vagrant`" ]; then
+    # inside a vagrant box, add user 'vagrant' to group docker for the same reason
+    # $USER was 'root', not 'vagrant', during provisionning step
+    sudo usermod -a -G docker vagrant
+fi
+
+
 # Start the whole stack.
 ./docker-compose-wrapper.sh up -d
