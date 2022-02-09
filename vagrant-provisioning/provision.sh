@@ -22,7 +22,7 @@ if [ ! -f env.local ]; then
 # override with values needed for vagrant
 export HOSTNAME_FQDN='${VM_HOSTNAME}.$VM_DOMAIN'
 # Refine because GITLAB_WEB_URL depends on HOSTNAME_FQDN.
-export GITLAB_WEB_URL='https://\${HOSTNAME_FQDN}'
+export GITLAB_WEB_URL="https://\${HOSTNAME_FQDN}"
 
 export SSL_CERTIFICATE="$SSL_CERTIFICATE"
 export SSL_CERTIFICATE_KEY="$SSL_CERTIFICATE_KEY"
