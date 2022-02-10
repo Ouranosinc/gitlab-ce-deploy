@@ -9,10 +9,15 @@ services:
     environment:
       # https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-config-template/gitlab.rb.template
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://${HOSTNAME_FQDN}'
+        external_url 'https://${HOSTNAME_FQDN}'
+
+        # https://docs.gitlab.com/omnibus/settings/nginx.html#setting-http-strict-transport-security
+        # https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/
+        # nginx['hsts_max_age'] = 0  # 0 disable HSTS, for self-signed SSL cert only
 
         # https://docs.gitlab.com/12.10/ee/administration/pages/index.html#wildcard-domains
         # pages will be available at http://<USER or GROUP>.${HOSTNAME_FQDN}/<REPO>
+        # TODO: switch to httpS for Pages once we have Wildcard SSL Cert.
         pages_external_url 'http://${HOSTNAME_FQDN}'
         pages_nginx['redirect_http_to_https'] = false
         gitlab_pages['inplace_chroot'] = true
@@ -42,6 +47,8 @@ services:
       - 'gitlab_config_persistence:/etc/gitlab'
       - 'gitlab_logs_persistence:/var/log/gitlab'
       - 'gitlab_data_persistence:/var/opt/gitlab'
+      - '${SSL_CERTIFICATE}:/etc/gitlab/ssl/${HOSTNAME_FQDN}.crt:ro'
+      - '${SSL_CERTIFICATE_KEY}:/etc/gitlab/ssl/${HOSTNAME_FQDN}.key:ro'
 
   gitlab-runner:
     image: 'gitlab/gitlab-runner:v14.7.0'

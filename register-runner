@@ -3,6 +3,8 @@
 #
 # To execute after first `docker-compose-wrapper.sh up -d`.
 
+# NOTE: register step do not work when GITLAB_WEB_URL uses self-signed cert.
+
 set +x  # hide password
 # Get GITLAB_WEB_URL, GITLAB_TOKEN
 . ./env.local

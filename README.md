@@ -8,6 +8,10 @@ Deploy gitlab-ce using docker-compose
   [docker-compose](https://docs.docker.com/compose/) installed on your Linux
   host.
 
+* Ensure you have a valid Wildcard SSL Certificate for your host.  The Wildcard
+  requirement is for Gitlab Pages.  Get a real SSL Certificate, support for
+  self-signed SSL Certificate is not fully implemented.
+
 * Gitlab Pages needs "wildcard DNS" to be setup for this Gitlab host, see
 https://docs.gitlab.com/ee/administration/pages/index.html#dns-configuration.
 

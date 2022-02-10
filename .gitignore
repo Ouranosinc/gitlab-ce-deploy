@@ -3,3 +3,9 @@ ubuntu-bionic-18.04-cloudimg-console.log
 vagrant_variables.yml
 **.swp
 env.local
+
+# store real ssl cert since self-signed cert to not work well
+ssl_cert/
+
+# store backup from scripts/backup-gitlab.sh here
+gitlab-backup/
