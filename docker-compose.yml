@@ -10,6 +10,7 @@ services:
       # https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-config-template/gitlab.rb.template
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://${HOSTNAME_FQDN}'
+        nginx['redirect_http_to_https'] = true
 
         # https://docs.gitlab.com/omnibus/settings/nginx.html#setting-http-strict-transport-security
         # https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/
