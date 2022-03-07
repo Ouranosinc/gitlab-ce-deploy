@@ -16,10 +16,9 @@ services:
         # nginx['hsts_max_age'] = 0  # 0 disable HSTS, for self-signed SSL cert only
 
         # https://docs.gitlab.com/12.10/ee/administration/pages/index.html#wildcard-domains
-        # pages will be available at http://<USER or GROUP>.${HOSTNAME_FQDN}/<REPO>
-        # TODO: switch to httpS for Pages once we have Wildcard SSL Cert.
-        pages_external_url 'http://${HOSTNAME_FQDN}'
-        pages_nginx['redirect_http_to_https'] = false
+        # pages will be available at https://<USER or GROUP>.${HOSTNAME_FQDN}/<REPO>
+        pages_external_url 'https://${HOSTNAME_FQDN}'
+        pages_nginx['redirect_http_to_https'] = true
         gitlab_pages['inplace_chroot'] = true
 
         # rather not take over the really ssh port 22 of the host
