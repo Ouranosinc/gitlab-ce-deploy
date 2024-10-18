@@ -65,7 +65,7 @@ for adir in ${EXTRA_CONF_DIRS}; do
 done
 echo "COMPOSE_CONF_LIST=${COMPOSE_CONF_LIST}"
 
-docker-compose ${COMPOSE_CONF_LIST} $*
+docker compose ${COMPOSE_CONF_LIST} $*
 ERR=$?
 
 # execute post-compose function if exists and no error occurred
