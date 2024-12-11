@@ -69,13 +69,13 @@ services:
 
 volumes:
   gitlab_data_persistence:
-    external:
-      name: gitlab_data_persistence
+    external: true
+    name: gitlab_data_persistence
   gitlab_config_persistence:
-    external:
-      name: gitlab_config_persistence
+    external: true
+    name: gitlab_config_persistence
   gitlab_logs_persistence:
-    external:
-      name: gitlab_logs_persistence
+    external: true
+    name: gitlab_logs_persistence
 
 # vi: tabstop=8 expandtab shiftwidth=2 softtabstop=2
